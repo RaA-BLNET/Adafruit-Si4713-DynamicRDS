@@ -1,4 +1,4 @@
-Adafruit-Si4713-Library [![Build Status](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed.svg?branch=master)](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed)
+Adafruit-Si4713-SerialTextFeed [![Build Status](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed.svg?branch=master)](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed)
 ================
 With this code you can send messages over serial and they will appear in the radiotext and RDS-PS. RDS-PS is a bit bugged but radiotext works perfectly fine.
 <hr>
