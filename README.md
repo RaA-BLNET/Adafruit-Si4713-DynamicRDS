@@ -6,14 +6,14 @@ You can control the RDS data with serial commands. Following commands are availa
 main<br/>
 Sets the initial RDS data (from the function initialRDSdata)main<br/>
 
-regmain<br/>
-Switches to regional modemain<br/>
+reg<br/>
+Switches to regional mode.<br/>
 
-titlemain<br/>
-You can set the artist & title information with this command.main<br/>
+title<br/>
+You can set the artist & title information with this command.<br/>
 
-infomain<br/>
-You can send any information with this command. That could be an announcement, the name of the currently running show or something else.main<br/>
+info<br/>
+You can send any information with this command. That could be an announcement, the name of the currently running show or something else.<br/>
 
 Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 165 of the file "adaradio.ini". Otherwise, strings will get corrupted.
 
