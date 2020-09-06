@@ -4,7 +4,7 @@ With this code you can send messages over serial and they will appear in the rad
 You can control the RDS data with serial commands. Following commands are available in this version:
 
 main<br/>
-Sets the initial RDS data (from the function initialRDSdata)main<br/>
+Sets the initial RDS data (from the function initialRDSdata)<br/>
 
 reg<br/>
 Switches to regional mode.<br/>
