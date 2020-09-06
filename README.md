@@ -1,19 +1,19 @@
 Adafruit-Si4713-SerialTextFeed [![Build Status](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed.svg?branch=master)](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-SerialTextFeed)
 ================
-With this code you can send messages over serial and they will appear in the radiotext and RDS-PS. RDS-PS is a bit bugged but radiotext works perfectly fine.
+With this code you can send messages over serial and they will appear in the radiotext and RDS-PS. RDS-PS is a bit bugged but radiotext works perfectly fine.<br/>
 You can control the RDS data with serial commands. Following commands are available in this version:
 
-main
-Sets the initial RDS data (from the function initialRDSdata)
+main<br/>
+Sets the initial RDS data (from the function initialRDSdata)main<br/>
 
-reg
-Switches to regional mode
+regmain<br/>
+Switches to regional modemain<br/>
 
-title
-You can set the artist & title information with this command.
+titlemain<br/>
+You can set the artist & title information with this command.main<br/>
 
-info
-You can send any information with this command. That could be an announcement, the name of the currently running show or something else.
+infomain<br/>
+You can send any information with this command. That could be an announcement, the name of the currently running show or something else.main<br/>
 
 Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 165 of the file "adaradio.ini". Otherwise, strings will get corrupted.
 
