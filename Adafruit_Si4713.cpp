@@ -251,7 +251,7 @@ void Adafruit_Si4713::beginRDS(uint16_t programID, int mesCt) {
   //6.75KHz (default is 675)
   setProperty(SI4713_PROP_TX_PILOT_DEVIATION, 675);
   // 2.5KHz (default is 300)
-  setProperty(SI4713_PROP_TX_RDS_DEVIATION, 300);
+  setProperty(SI4713_PROP_TX_RDS_DEVIATION, 250);
 
   // RDS IRQ
   setProperty(SI4713_PROP_TX_RDS_INTERRUPT_SOURCE, 0x0001);
@@ -262,7 +262,7 @@ void Adafruit_Si4713::beginRDS(uint16_t programID, int mesCt) {
   // RDSD0 & RDSMS (default)
   setProperty(SI4713_PROP_TX_RDS_PS_MISC, 0x8D48);
   // 3 repeats (default)
-  setProperty(SI4713_PROP_TX_RDS_PS_REPEAT_COUNT, 12);
+  setProperty(SI4713_PROP_TX_RDS_PS_REPEAT_COUNT, 8);
 
   setProperty(SI4713_PROP_TX_RDS_MESSAGE_COUNT, mesCt);
   setProperty(SI4713_PROP_TX_RDS_PS_AF, 0xE137); // 93.0 MHz E137
@@ -347,7 +347,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
 
   // enable!
   // Serial.println("Enable RDS");
-  setProperty(SI4713_PROP_TX_COMPONENT_ENABLE, 0x0007); // stereo, pilot+rds
+  // setProperty(SI4713_PROP_TX_COMPONENT_ENABLE, 0x0007); // stereo, pilot+rds
   /*
   // wait till ready
   while (getStatus() != 0x80) {

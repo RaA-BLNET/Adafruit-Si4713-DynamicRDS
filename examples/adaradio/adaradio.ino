@@ -28,6 +28,12 @@
 
 Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 
+void initialRDSdata() {
+  radio.beginRDS(0x4F87, 1);
+  radio.setRDSstation("RaABLNET");
+  radio.setRDSbuffer("Adafruit-Si4713-SerialTextFeed repository from GitHub.com       ");
+}
+
 void setup() {
   Serial.begin(9600);
   Serial.println("Adafruit Radio - Si4713 Test");
@@ -65,12 +71,10 @@ void setup() {
   Serial.print("\tCurr ANTcap:"); 
   Serial.println(radio.currAntCap);
   // begin the RDS/RDBS transmission
-  radio.beginRDS(0x4F30, 1);
-  radio.setRDSstation("RaABLNET");
-  radio.setRDSbuffer("Adafruit-Si4713-SerialTextFeed repository from GitHub.com       ");
+  initialRDSdata();
   Serial.println("RDS on!");  
   radio.setGPIOctrl(_BV(1) | _BV(2));  // set GP1 and GP2 to output
-
+  Serial.println("Enter help for help.");
 }
 
 
@@ -92,14 +96,46 @@ void serialEvent() {
   
             String getTextSerial = Serial.readString();
             getTextSerial.trim();
-            String PSSerial =  "RaABLNETRaABLNETRaABLNET" + getTextSerial;
-            String RTSerial = "Now playing: " + getTextSerial;
+            if (getTextSerial == "help"){
+                Serial.println(F("You can control the RDS data with serial commands. Following commands are available in this version:"));
+                Serial.println(F("---------------------------------"));
+                Serial.println(F("main"));
+                Serial.println(F("Sets the initial RDS data (from the function initialRDSdata)"));
+                Serial.println(F("---------------------------------"));
+                Serial.println(F("reg"));
+                Serial.println(F("Switches to regional mode"));
+                Serial.println(F("---------------------------------"));
+                Serial.println(F("title"));
+                Serial.println(F("You can set the artist & title information with this command."));
+                Serial.println(F("---------------------------------"));
+                Serial.println(F("info"));
+                Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
+                Serial.println(F("---------------------------------"));
+                Serial.println(F("Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 165 of this file. Otherwise, strings will get corrupted."));
+            } else if (getTextSerial == "main") {
+                initialRDSdata();
+                Serial.println(F("Applied changes"));
+            } else if (getTextSerial == "reg") {
+                radio.beginRDS(0x4E87, 1);
+                radio.setRDSstation("Regional");
+                radio.setRDSbuffer("Regional RDS data                                               ");
+                Serial.println(F("Applied changes"));
+            } else if (getTextSerial == "title") {
+              Serial.println("Please enter artist & title information");
+              while(!Serial.available() ){}
+              String getTitleSerial = Serial.readString();
+              getTitleSerial.trim();
+              String PSSerial =  "RaABLNETRaABLNETRaABLNET" + getTitleSerial;
+            String RTSerial = "Now playing: " + getTitleSerial;
             int PSlength = PSSerial.length();
             int RTlength = RTSerial.length();
             int append = 64 - RTlength;
              for (int i = 0; i<append; i++) {
                 RTSerial.concat(" ");
               }
+              if(RTSerial.length() > 64) {
+               RTSerial[64] = '\0';
+            }
               int PSappend = PSlength % 8; 
             switch (PSappend) {
               case 1:
@@ -126,14 +162,69 @@ void serialEvent() {
               }
             int PSnewlength = PSSerial.length();
             int mesCount = (PSnewlength + (8-1))/8;
-            char radiotext[64];
+            char radiotext[100];
             char rdsps[PSnewlength];
-            radio.beginRDS(0x4F30, mesCount);
+            radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSSerial.c_str());
             radio.setRDSstation(rdsps);
             strcpy(radiotext, RTSerial.c_str());
             radio.setRDSbuffer(radiotext);
             Serial.println("Radiotext: " + RTSerial);
             Serial.println("RDS-PS: " + PSSerial);
-            Serial.println("Message: " + getTextSerial);
+            Serial.println("Artist & title information: " + getTitleSerial);
+            } else if (getTextSerial == "info") {
+              Serial.println("Please enter information");
+              while(!Serial.available() ){}
+              String getInfoSerial = Serial.readString();
+              getInfoSerial.trim();
+              String PSSerial =  "RaABLNETRaABLNETRaABLNET" + getInfoSerial;
+            String RTSerial = getInfoSerial;
+            int PSlength = PSSerial.length();
+            int RTlength = RTSerial.length();
+            int append = 64 - RTlength;
+             for (int i = 0; i<append; i++) {
+                RTSerial.concat(" ");
+              }
+              if(RTSerial.length() > 64) {
+               RTSerial[64] = '\0';
+            }
+              int PSappend = PSlength % 8; 
+            switch (PSappend) {
+              case 1:
+              PSSerial.concat("       ");
+              break;
+              case 2:
+              PSSerial.concat("      ");
+              break;
+              case 3:
+              PSSerial.concat("     ");
+              break;
+              case 4:
+              PSSerial.concat("    ");
+              break;
+              case 5:
+              PSSerial.concat("   ");
+              break;
+              case 6:
+              PSSerial.concat("  ");
+              break;
+              case 7:
+              PSSerial.concat(" ");
+              break;
+              }
+            int PSnewlength = PSSerial.length();
+            int mesCount = (PSnewlength + (8-1))/8;
+            char radiotext[100];
+            char rdsps[PSnewlength];
+            radio.beginRDS(0x4F87, mesCount);
+            strcpy(rdsps, PSSerial.c_str());
+            radio.setRDSstation(rdsps);
+            strcpy(radiotext, RTSerial.c_str());
+            radio.setRDSbuffer(radiotext);
+            Serial.println("Radiotext: " + RTSerial);
+            Serial.println("RDS-PS: " + PSSerial);
+            Serial.println("Information: " + getInfoSerial);
+            } else {
+              Serial.println(F("Command not found. Enter help for help."));
+            }
   }
