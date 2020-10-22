@@ -324,16 +324,16 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
     sendCommand(8);
   }
 
-  /*
+  
   // set time
    _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
-   _i2ccommand[1] = 0x84;
+   _i2ccommand[1] = 0x04;
    _i2ccommand[2] = 0x40; // RTC
    _i2ccommand[3] = 01;
-   _i2ccommand[4] = 0xA7;
+   _i2ccommand[4] = 0xCD;
    _i2ccommand[5] = 0x0B;
-   _i2ccommand[6] = 0x2D;
-   _i2ccommand[7] = 0x6C;
+   _i2ccommand[6] = 0x2A;
+   _i2ccommand[7] = 0x04;
    sendCommand(8);
 
    Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
@@ -343,7 +343,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
    Serial.print("Circ used: "); Serial.println(Wire.read());
    Serial.print("FIFO avail: "); Serial.println(Wire.read());
    Serial.print("FIFO used: "); Serial.println(Wire.read());
-   */
+   
 
   // enable!
   // Serial.println("Enable RDS");
