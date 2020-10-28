@@ -31,7 +31,7 @@ Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 void initialRDSdata() {
   radio.beginRDS(0x4F87, 1);
   radio.setRDSstation("RaABLNET");
-  radio.setRDSbuffer("Adafruit-Si4713-SerialTextFeed repository from GitHub.com       ");
+  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com           ");
 }
 
 void setup() {
