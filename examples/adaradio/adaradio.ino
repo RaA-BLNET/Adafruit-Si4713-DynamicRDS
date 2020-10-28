@@ -184,7 +184,7 @@ void serialEvent() {
               while(!Serial.available() ){}
               String getInfoSerial = Serial.readString();
               getInfoSerial.trim();
-              String PSSerial =  dynamicstationname + getInfoSerial;
+              String PSSerial =  dynamicstationame + getInfoSerial;
             String RTSerial = getInfoSerial;
             int PSlength = PSSerial.length();
             int RTlength = RTSerial.length();
