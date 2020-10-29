@@ -33,4 +33,4 @@ Limor Fried/Ladyada (Adafruit Industries).
 BSD license, check license.txt for more information
 All text above must be included in any redistribution
 
-To install, use the Arduino Library Manager and search for "Adafruit Si4713 Library" and install the library
+To install, download this code, unpack it and open "adaradio.ino" in the folder /examples/adaradio/
