@@ -393,7 +393,7 @@ void serialEvent() {
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
             char radiotext[100];
-            char rdsps[100];
+            char rdsps[200];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
@@ -421,7 +421,7 @@ void serialEvent() {
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
             char radiotext[100];
-            char rdsps[100];
+            char rdsps[200];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
