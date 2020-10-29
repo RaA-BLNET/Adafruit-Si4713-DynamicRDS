@@ -15,7 +15,7 @@ You can set the artist & title information with this command.<br/>
 info<br/>
 You can send any information with this command. That could be an announcement, the name of the currently running show or something else.<br/>
 
-Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 395/396 amd 423/424 of the file "adaradio.ino". Otherwise, strings will get corrupted.
+Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 395/396 and 423/424 of the file "adaradio.ino". Otherwise, strings will get corrupted.
 
 <hr>
 <a href="https://www.adafruit.com/product/1958"><img src="assets/board.jpg?raw=true" width="500px"></a>
