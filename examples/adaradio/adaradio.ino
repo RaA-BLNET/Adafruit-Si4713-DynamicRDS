@@ -54,7 +54,7 @@ void setup() {
    */
 
   Serial.print("\nSet TX power");
-  radio.setTXpower(115);  // dBuV, 88-115 max
+  radio.setTXpower(115);  // dBuV, 88-120 max
 
   Serial.print("\nTuning into "); 
   Serial.print(FMSTATION/100); 
@@ -78,18 +78,268 @@ void setup() {
 }
 
 
-
+//String-into-StringArray-Splitter from https://stackoverflow.com/questions/9072320/split-string-into-string-array
 void loop() {
-  radio.readASQ();
-  Serial.print("\tCurr ASQ: 0x"); 
-  Serial.println(radio.currASQ, HEX);
-  Serial.print("\tCurr InLevel:"); 
-  Serial.println(radio.currInLevel);
-  // toggle GPO1 and GPO2
-  radio.setGPIO(_BV(1));
-  delay(1000);
-  radio.setGPIO(_BV(2));
-  delay(1000);
+}
+ String getValue(String data, char separator, int index) {
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
+  int found = 0;
+
+  for(int i=0; i<=maxIndex && found<=index; i++){
+    if(data.charAt(i)==separator || i==maxIndex){
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
+    }
+  }
+
+  return found>index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+// RDS-PS text processor
+String rdspstextprocessor(String getTitleSerialp) {
+                 String PSSerial[20];
+               String PSfinal;
+               int psloopcounter = 0;
+               int psloopcounter2 = 0;
+               do { 
+               PSSerial[psloopcounter] = getValue(getTitleSerialp, ' ', psloopcounter);
+               psloopcounter++;
+              } while (psloopcounter <= 19);
+              do {
+               if ((PSSerial[psloopcounter2].length()) == 0) {
+                } else if ((PSSerial[psloopcounter2].length()) == 1){
+                    if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                    if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                      if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
+                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3] + " ");
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 3].length()) == 2) {
+                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      } else {
+                      PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + "  ");
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                      if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
+                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      } else {
+                      PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                      psloopcounter2++;
+                      psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
+                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                      psloopcounter2++;
+                      psloopcounter2++;
+                    } else if ((PSSerial[psloopcounter2 + 2].length()) == 4) {
+                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                      psloopcounter2++;
+                      psloopcounter2++;
+                    } else {
+                      PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "   ");
+                      psloopcounter2++;
+                    }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        }
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 5) {
+                    PSfinal.concat(PSSerial[psloopcounter2] + " " +PSSerial[psloopcounter2 + 1] + " ");
+                    psloopcounter2++;
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 6) {
+                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                    psloopcounter2++;
+                    } else {
+                    PSfinal.concat("   " + PSSerial[psloopcounter2] + "    ");
+                    }
+                  } else if ((PSSerial[psloopcounter2].length()) == 2){
+                    if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + PSSerial[psloopcounter2 + 3]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                        }
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        psloopcounter2++;
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 5) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                        psloopcounter2++;
+                    } else {
+                    PSfinal.concat("   " + PSSerial[psloopcounter2] + "   ");
+                    }
+                  } else if ((PSSerial[psloopcounter2].length()) == 3){
+                    if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2] + " ");
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
+                      if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        psloopcounter2++;
+                        psloopcounter2++;
+                      } else {
+                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        psloopcounter2++;
+                      }
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
+                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                    psloopcounter2++;
+                    } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
+                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                    psloopcounter2++;
+                    } else {
+                    PSfinal.concat("  " + PSSerial[psloopcounter2] + "   ");
+                    }
+                  } else if ((PSSerial[psloopcounter2].length()) == 4){
+                      if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                          if ((PSSerial[psloopcounter2 + 2].length()) == 1){
+                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                          psloopcounter2++;
+                          psloopcounter2++;
+                          } else {
+                          PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                          psloopcounter2++;
+                          }
+                      } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
+                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                          psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
+                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                          psloopcounter2++;
+                      } else {
+                    PSfinal.concat("  " + PSSerial[psloopcounter2] + "  ");
+                      }
+                  } else if ((PSSerial[psloopcounter2].length()) == 5){
+                      if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        psloopcounter2++;
+                      } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
+                            PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                            psloopcounter2++;
+                      } else {
+                            PSfinal.concat(" " + PSSerial[psloopcounter2] + "  ");
+                      }
+                  } else if ((PSSerial[psloopcounter2].length()) == 6){
+                      if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
+                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                          psloopcounter2++;
+                      } else {
+                    PSfinal.concat(" " + PSSerial[psloopcounter2] + " ");
+                      }
+                  } else if ((PSSerial[psloopcounter2].length()) == 7){
+                    PSfinal.concat(PSSerial[psloopcounter2] + " ");
+                  } else if ((PSSerial[psloopcounter2].length()) >= 8){
+                    PSSerial[psloopcounter2].remove(8);
+                    PSfinal.concat(PSSerial[psloopcounter2]);
+                  }
+                  psloopcounter2++;
+              } while (psloopcounter2 <= 19);
+            
+            PSfinal.concat(F("RaABLNETRaABLNETRaABLNET"));
+  return PSfinal;
 }
 // Sending RDS Data over Serial
 void serialEvent() {
@@ -97,7 +347,6 @@ void serialEvent() {
             String getTextSerial = Serial.readString();
             getTextSerial.trim();
             String appliedchanges = F("Applied changes");
-            String dynamicstationame = F("RaABLNETRaABLNETRaABLNET");
             String radiotextoutputtitle = F("Radiotext: ");
             String rdspsoutputtitle = F("RDS-PS: ");
             if (getTextSerial == F("help")){
@@ -116,7 +365,7 @@ void serialEvent() {
                 Serial.println(F("info"));
                 Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
                 Serial.println(line);
-                Serial.println(F("Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 165 of this file. Otherwise, strings will get corrupted."));
+                Serial.println(F("Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 395 of this file. Otherwise, strings will get corrupted."));
             } else if (getTextSerial == F("main")) {
                 initialRDSdata();
                 Serial.println(appliedchanges);
@@ -130,10 +379,8 @@ void serialEvent() {
               while(!Serial.available() ){}
               String getTitleSerial = Serial.readString();
               getTitleSerial.trim();
-              String PSSerial = dynamicstationame + getTitleSerial;
               String nowplaying = F("Now playing: ");
             String RTSerial = nowplaying + getTitleSerial;
-            int PSlength = PSSerial.length();
             int RTlength = RTSerial.length();
             int append = 64 - RTlength;
              for (int i = 0; i<append; i++) {
@@ -142,41 +389,18 @@ void serialEvent() {
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
-              int PSappend = PSlength % 8; 
-            switch (PSappend) {
-              case 1:
-              PSSerial.concat(F("       "));
-              break;
-              case 2:
-              PSSerial.concat(F("      "));
-              break;
-              case 3:
-              PSSerial.concat(F("     "));
-              break;
-              case 4:
-              PSSerial.concat(F("    "));
-              break;
-              case 5:
-              PSSerial.concat(F("   "));
-              break;
-              case 6:
-              PSSerial.concat(F("  "));
-              break;
-              case 7:
-              PSSerial.concat(F(" "));
-              break;
-              }
-            int PSnewlength = PSSerial.length();
-            int mesCount = (PSnewlength + (8-1))/8;
+            String PSfinal2 = rdspstextprocessor(getTitleSerial);
+            int PSnewlength = PSfinal2.length();
+            int mesCount = PSnewlength / 8;
             char radiotext[100];
-            char rdsps[PSnewlength];
+            char rdsps[100];
             radio.beginRDS(0x4F87, mesCount);
-            strcpy(rdsps, PSSerial.c_str());
+            strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
             strcpy(radiotext, RTSerial.c_str());
             radio.setRDSbuffer(radiotext);
             Serial.println(radiotextoutputtitle + RTSerial);
-            Serial.println(rdspsoutputtitle + PSSerial);
+            Serial.println(rdspsoutputtitle + PSfinal2);
             String titleinfooutputtitle = F("Artist & title information: ");
             Serial.println(titleinfooutputtitle + getTitleSerial);
             } else if (getTextSerial == F("info")) {
@@ -184,9 +408,7 @@ void serialEvent() {
               while(!Serial.available() ){}
               String getInfoSerial = Serial.readString();
               getInfoSerial.trim();
-              String PSSerial =  dynamicstationame + getInfoSerial;
             String RTSerial = getInfoSerial;
-            int PSlength = PSSerial.length();
             int RTlength = RTSerial.length();
             int append = 64 - RTlength;
              for (int i = 0; i<append; i++) {
@@ -195,42 +417,19 @@ void serialEvent() {
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
-              int PSappend = PSlength % 8; 
-            switch (PSappend) {
-              case 1:
-              PSSerial.concat(F("       "));
-              break;
-              case 2:
-              PSSerial.concat(F("      "));
-              break;
-              case 3:
-              PSSerial.concat(F("     "));
-              break;
-              case 4:
-              PSSerial.concat(F("    "));
-              break;
-              case 5:
-              PSSerial.concat(F("   "));
-              break;
-              case 6:
-              PSSerial.concat(F("  "));
-              break;
-              case 7:
-              PSSerial.concat(F(" "));
-              break;
-              }
-            int PSnewlength = PSSerial.length();
-            int mesCount = (PSnewlength + (8-1))/8;
+            String PSfinal2 = rdspstextprocessor(getInfoSerial);
+            int PSnewlength = PSfinal2.length();
+            int mesCount = PSnewlength / 8;
             char radiotext[100];
-            char rdsps[PSnewlength];
+            char rdsps[100];
             radio.beginRDS(0x4F87, mesCount);
-            strcpy(rdsps, PSSerial.c_str());
+            strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
             strcpy(radiotext, RTSerial.c_str());
             radio.setRDSbuffer(radiotext);
             String infooutputtitle = F("Information: ");
             Serial.println(radiotextoutputtitle + RTSerial);
-            Serial.println(rdspsoutputtitle + PSSerial);
+            Serial.println(rdspsoutputtitle + PSfinal2);
             Serial.println(infooutputtitle + getInfoSerial);
             } else {
               Serial.println(F("Command not found. Enter help for help."));
