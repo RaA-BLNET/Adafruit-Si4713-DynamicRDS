@@ -232,11 +232,11 @@ String rdspstextprocessor(String getTitleSerialp) {
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
