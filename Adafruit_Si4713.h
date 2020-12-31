@@ -173,7 +173,7 @@ public:
   // RDS stuff
   void beginRDS(uint16_t programID, int mesCt);
   void setRDSstation(char *s);
-  void setRDSbuffer(char s[64]);
+  void setRDSbuffer(char s[64], int gcCounterPT);
 
   uint16_t currFreq;  ///< current frequency
   uint8_t currdBuV,   ///< current BuV
