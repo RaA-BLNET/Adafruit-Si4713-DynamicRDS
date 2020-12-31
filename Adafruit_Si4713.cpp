@@ -300,12 +300,16 @@ void Adafruit_Si4713::setRDSstation(char *s) {
  *    @param  *s
  *            string to load
  */
-void Adafruit_Si4713::setRDSbuffer(char *s) {
+void Adafruit_Si4713::setRDSbuffer(char *s, int gcCounterPT) {
   uint8_t i, len = strlen(s);
-  uint8_t slots = (len + 3) / 4;
+  uint8_t gcValue;
+  uint8_t slots = ((len + 3) / 4);
   char slot[5];
-
-  for (uint8_t i = 0; i < slots; i++) {
+  if (gcCounterPT % 2 == 0)
+    gcValue = 0;
+  else if (gcCounterPT % 2 == 1)
+    gcValue = 16;
+  for (uint8_t i = gcValue; i < slots + gcValue; i++) {
     memset(_i2ccommand, ' ', 8); // clear it with ' '
     memcpy(_i2ccommand + 4, s, min(4, (int)strlen(s)));
     s += 4;
@@ -314,7 +318,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
     // char *slot = (char *)( _i2ccommand+4);
     // Serial.print(" to '"); Serial.print(slot); Serial.println("'");
     _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
-    if (i == 0)
+    if (i == gcValue)
       _i2ccommand[1] = 0x06;
     else
       _i2ccommand[1] = 0x04;
