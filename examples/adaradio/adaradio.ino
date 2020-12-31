@@ -25,13 +25,15 @@
 #define RESETPIN 12
 
 #define FMSTATION 10230      // 10230 == 102.30 MHz
+int gcCounter = 0;
 
 Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 
 void initialRDSdata() {
   radio.beginRDS(0x4F87, 1);
   radio.setRDSstation("RaABLNET");
-  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com           ");
+  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com           ", gcCounter);
+  gcCounter++;
 }
 
 void setup() {
@@ -372,7 +374,8 @@ void serialEvent() {
             } else if (getTextSerial == F("reg")) {
                 radio.beginRDS(0x4E87, 1);
                 radio.setRDSstation("Regional");
-                radio.setRDSbuffer("Regional RDS data                                               ");
+                radio.setRDSbuffer("Regional RDS data                                               ", gcCounter);
+                gcCounter++;
                 Serial.println(appliedchanges);
             } else if (getTextSerial == F("title")) {
               Serial.println(F("Please enter artist & title information"));
@@ -398,7 +401,8 @@ void serialEvent() {
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
             strcpy(radiotext, RTSerial.c_str());
-            radio.setRDSbuffer(radiotext);
+            radio.setRDSbuffer(radiotext, gcCounter);
+            gcCounter++;
             Serial.println(radiotextoutputtitle + RTSerial);
             Serial.println(rdspsoutputtitle + PSfinal2);
             String titleinfooutputtitle = F("Artist & title information: ");
@@ -426,7 +430,8 @@ void serialEvent() {
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
             strcpy(radiotext, RTSerial.c_str());
-            radio.setRDSbuffer(radiotext);
+            radio.setRDSbuffer(radiotext, gcCounter);
+            gcCounter++;
             String infooutputtitle = F("Information: ");
             Serial.println(radiotextoutputtitle + RTSerial);
             Serial.println(rdspsoutputtitle + PSfinal2);
