@@ -324,7 +324,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
     sendCommand(8);
   }
 
-  
+  /*
   // set time
    _i2ccommand[0] = SI4710_CMD_TX_RDS_BUFF;
    _i2ccommand[1] = 0x04;
@@ -335,7 +335,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s) {
    _i2ccommand[6] = 0x2A;
    _i2ccommand[7] = 0x04;
    sendCommand(8);
-
+  */
    Wire.requestFrom((uint8_t)_i2caddr, (uint8_t)6);
    Wire.read(); // status
    Serial.print("FIFO overflow: 0x"); Serial.println(Wire.read(), HEX);
