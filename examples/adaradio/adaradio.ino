@@ -367,7 +367,8 @@ void serialEvent() {
                 Serial.println(F("info"));
                 Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
                 Serial.println(line);
-                Serial.println(F("Notice: The inputted text must be less than 100 characters. If you want to change that, edit it in line 395 of this file. Otherwise, strings will get corrupted."));
+                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for Radiotext, 256 for RDS-PS). If you want to change that, edit it in these lines of this file: 398/427 for Radiotext, 399/428 for RDS-PS. Otherwise strings will get corrupted."));
+                Serial.println(F("Notice 2: The number of RDS-PS messages is defined in the lines 104 and 111."));
             } else if (getTextSerial == F("main")) {
                 initialRDSdata();
                 Serial.println(appliedchanges);
@@ -395,8 +396,8 @@ void serialEvent() {
             String PSfinal2 = rdspstextprocessor(getTitleSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
-            char radiotext[100];
-            char rdsps[200];
+            char radiotext[128];
+            char rdsps[256];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
@@ -424,8 +425,8 @@ void serialEvent() {
             String PSfinal2 = rdspstextprocessor(getInfoSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
-            char radiotext[100];
-            char rdsps[200];
+            char radiotext[128];
+            char rdsps[256];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
