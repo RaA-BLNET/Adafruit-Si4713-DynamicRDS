@@ -373,7 +373,7 @@ void serialEvent() {
                 Serial.println(F("info"));
                 Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
                 Serial.println(line);
-                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for Radiotext, 256 for RDS-PS). If you want to change that, edit it in these lines of this file: 405/434 for Radiotext, 406/435 for RDS-PS. Otherwise strings will get corrupted."));
+                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for Radiotext, 256 for RDS-PS). If you want to change that, edit it in these lines of this file: 404/432 for Radiotext, 405/433 for RDS-PS. Otherwise strings will get corrupted."));
                 Serial.println(F("Notice 2: The number of RDS-PS messages is defined in the lines 104, 117 and 347"));
             } else if (getTextSerial == F("main")) {
                 initialRDSdata();
