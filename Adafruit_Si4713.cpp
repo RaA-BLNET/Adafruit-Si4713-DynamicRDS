@@ -310,7 +310,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s, int gcCounterPT) {
   else if (gcCounterPT % 2 == 1)
     gcValue = 16;
   for (uint8_t i = gcValue; i < slots + gcValue; i++) {
-    memset(_i2ccommand, ' ', 8); // clear it with ' '
+    memset(_i2ccommand, 0x0D, 8); // clear it with 0x0D (carriage return)
     memcpy(_i2ccommand + 4, s, min(4, (int)strlen(s)));
     s += 4;
     _i2ccommand[8] = 0;
