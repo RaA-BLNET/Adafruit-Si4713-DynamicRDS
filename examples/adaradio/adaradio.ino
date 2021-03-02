@@ -32,7 +32,7 @@ Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 void initialRDSdata() {
   radio.beginRDS(0x4F87, 1);
   radio.setRDSstation("RaABLNET");
-  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com           ", gcCounter);
+  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com", gcCounter);
   gcCounter++;
 }
 
@@ -381,7 +381,7 @@ void serialEvent() {
             } else if (getTextSerial == F("reg")) {
                 radio.beginRDS(0x4E87, 1);
                 radio.setRDSstation("Regional");
-                radio.setRDSbuffer("Regional RDS data                                               ", gcCounter);
+                radio.setRDSbuffer("Regional RDS data", gcCounter);
                 gcCounter++;
                 Serial.println(appliedchanges);
             } else if (getTextSerial == F("title")) {
@@ -392,10 +392,9 @@ void serialEvent() {
               String nowplaying = F("Now playing: ");
             String RTSerial = nowplaying + getTitleSerial;
             int RTlength = RTSerial.length();
-            int append = 64 - RTlength;
-             for (int i = 0; i<append; i++) {
+              if (RTlength % 4 == 0) {
                 RTSerial.concat(F(" "));
-              }
+                }
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
@@ -421,10 +420,9 @@ void serialEvent() {
               getInfoSerial.trim();
             String RTSerial = getInfoSerial;
             int RTlength = RTSerial.length();
-            int append = 64 - RTlength;
-             for (int i = 0; i<append; i++) {
+              if (RTlength % 4 == 0) {
                 RTSerial.concat(F(" "));
-              }
+                }
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
