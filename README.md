@@ -1,5 +1,4 @@
 # Adafruit-Si4713-DynamicRDS
-================
 With this code you can send messages over serial and they will appear in the radiotext and RDS-PS.<br/>
 You can control the RDS data with serial commands. Following commands are available in this version:
 
