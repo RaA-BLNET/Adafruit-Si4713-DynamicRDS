@@ -1,4 +1,4 @@
-Adafruit-Si4713-DynamicRDS [![Build Status](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-DynamicRDS.svg?branch=master)](https://travis-ci.com/RaA-BLNET/Adafruit-Si4713-DynamicRDS)
+# Adafruit-Si4713-DynamicRDS
 ================
 With this code you can send messages over serial and they will appear in the radiotext and RDS-PS.<br/>
 You can control the RDS data with serial commands. Following commands are available in this version:
