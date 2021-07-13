@@ -63,7 +63,6 @@ void setup() {
   Serial.print('.'); 
   Serial.println(FMSTATION % 100);
   radio.tuneFM(FMSTATION); // 102.3 mhz
-
   // This will tell you the status in case you want to read it from the chip
   radio.readTuneStatus();
   Serial.print("\tCurr freq: "); 
@@ -83,7 +82,7 @@ void setup() {
 //String-into-StringArray-Splitter from https://stackoverflow.com/questions/9072320/split-string-into-string-array
 void loop() {
 }
- String getValue(String data, char separator, int index) {
+ String getValue(String data = "", char separator = "", int index = 0) {
   int strIndex[] = {0, -1};
   int maxIndex = data.length()-1;
   int found = 0;
@@ -102,7 +101,7 @@ void loop() {
 // RDS-PS text processor
 String rdspstextprocessor(String getTitleSerialp) {
                  String PSSerial[20];
-               String PSfinal;
+               String PSfinal = F("RaABLNETRaABLNETRaABLNET");
                int pswordnumber = 0;
                int psloopcounter = 0;
                int psloopcounter2 = 0;
@@ -345,13 +344,10 @@ String rdspstextprocessor(String getTitleSerialp) {
                   }
                   psloopcounter2++;
               } while (psloopcounter2 <= 19);
-            
-            PSfinal.concat(F("RaABLNETRaABLNETRaABLNET"));
   return PSfinal;
 }
 // Sending RDS Data over Serial
 void serialEvent() {
-  
             String getTextSerial = Serial.readString();
             getTextSerial.trim();
             String appliedchanges = F("Applied changes");
@@ -373,8 +369,7 @@ void serialEvent() {
                 Serial.println(F("info"));
                 Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
                 Serial.println(line);
-                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for Radiotext, 256 for RDS-PS). If you want to change that, edit it in these lines of this file: 404/432 for Radiotext, 405/433 for RDS-PS. Otherwise strings will get corrupted."));
-                Serial.println(F("Notice 2: The number of RDS-PS messages is defined in the lines 104, 117 and 347"));
+                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for radiotext, 96 for RDS-PS). There is no way to change that, because it's a hardware limitation of the Si4713 chip."));
             } else if (getTextSerial == F("main")) {
                 initialRDSdata();
                 Serial.println(appliedchanges);
@@ -401,8 +396,9 @@ void serialEvent() {
             String PSfinal2 = rdspstextprocessor(getTitleSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
+            if (mesCount>12) mesCount = 12;
             char radiotext[128];
-            char rdsps[256];
+            char rdsps[96];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
@@ -429,8 +425,9 @@ void serialEvent() {
             String PSfinal2 = rdspstextprocessor(getInfoSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
+            if (mesCount>12) mesCount = 12;
             char radiotext[128];
-            char rdsps[256];
+            char rdsps[96];
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
