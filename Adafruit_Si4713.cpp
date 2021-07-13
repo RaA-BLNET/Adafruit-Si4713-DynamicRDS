@@ -265,7 +265,7 @@ void Adafruit_Si4713::beginRDS(uint16_t programID, int mesCt) {
   setProperty(SI4713_PROP_TX_RDS_PS_REPEAT_COUNT, 8);
 
   setProperty(SI4713_PROP_TX_RDS_MESSAGE_COUNT, mesCt);
-  setProperty(SI4713_PROP_TX_RDS_PS_AF, 0xE137); // 93.0 MHz E137
+  setProperty(SI4713_PROP_TX_RDS_PS_AF, 0xE194); // 102.3 MHz E194
   setProperty(SI4713_PROP_TX_RDS_FIFO_SIZE, 0);
 
   setProperty(SI4713_PROP_TX_COMPONENT_ENABLE, 0x0007);
