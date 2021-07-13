@@ -14,8 +14,7 @@ You can set the artist & title information with this command.<br/>
 info<br/>
 You can send any information with this command. That could be an announcement, the name of the currently running show or something else.<br/>
 
-Notice: The inputted text must be less than a specified number of characters (128 for Radiotext, 256 for RDS-PS). If you want to change that, edit it in these lines of the file "adaradio.ino": 404/432 for Radiotext, 405/433 for RDS-PS. Otherwise strings will get corrupted.<br/>
-Notice 2: The number of RDS-PS messages is defined in the lines 104, 117 and 347.
+Notice: The inputted text must be less than a specified number of characters (128 for radiotext, 96 for RDS-PS). There is no way to change that, because it's a hardware limitation of the Si4713 chip.<br/>
 <img src="assets/rds_screenshot.jpg?raw=true" width="500px">
 <hr>
 <a href="https://www.adafruit.com/product/1958"><img src="assets/board.jpg?raw=true" width="500px"></a>
