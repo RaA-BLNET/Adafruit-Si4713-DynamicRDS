@@ -300,7 +300,11 @@ void Adafruit_Si4713::setRDSstation(char *s) {
  *    @param  *s
  *            string to load
  */
-void Adafruit_Si4713::setRDSbuffer(char *s, int gcCounterPT) {
+void Adafruit_Si4713::setRDSbuffer(char s[64], int gcCounterPT) {
+  char carriageReturn[2];
+  carriageReturn[0] = 0x0D;
+  carriageReturn[1] = '\0';
+  strcat(s, carriageReturn);
   uint8_t i, len = strlen(s);
   uint8_t gcValue;
   uint8_t slots = ((len + 3) / 4);
@@ -310,7 +314,7 @@ void Adafruit_Si4713::setRDSbuffer(char *s, int gcCounterPT) {
   else if (gcCounterPT % 2 == 1)
     gcValue = 16;
   for (uint8_t i = gcValue; i < slots + gcValue; i++) {
-    memset(_i2ccommand, 0x0D, 8); // clear it with 0x0D (carriage return)
+    memset(_i2ccommand, ' ', 8); // clear/fill
     memcpy(_i2ccommand + 4, s, min(4, (int)strlen(s)));
     s += 4;
     _i2ccommand[8] = 0;
