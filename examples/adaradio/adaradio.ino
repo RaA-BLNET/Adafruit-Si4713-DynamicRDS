@@ -387,9 +387,6 @@ void serialEvent() {
               String nowplaying = F("Now playing: ");
             String RTSerial = nowplaying + getTitleSerial;
             int RTlength = RTSerial.length();
-              if (RTlength % 4 == 0) {
-                RTSerial.concat(F(" "));
-                }
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
@@ -416,9 +413,6 @@ void serialEvent() {
               getInfoSerial.trim();
             String RTSerial = getInfoSerial;
             int RTlength = RTSerial.length();
-              if (RTlength % 4 == 0) {
-                RTSerial.concat(F(" "));
-                }
               if(RTSerial.length() > 64) {
                RTSerial[64] = '\0';
             }
