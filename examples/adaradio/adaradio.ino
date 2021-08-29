@@ -102,6 +102,10 @@ void loop() {
 String rdspstextprocessor(String getTitleSerialp) {
                  String PSSerial[20];
                String PSfinal = F("RaABLNETRaABLNETRaABLNET");
+               String space1 = F(" ");
+               String space2 = F("  ");
+               String space3 = F("   ");
+               String space4 = F("    ");
                int pswordnumber = 0;
                int psloopcounter = 0;
                int psloopcounter2 = 0;
@@ -120,224 +124,224 @@ String rdspstextprocessor(String getTitleSerialp) {
                     if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
                     if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
                       if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
-                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3] + " ");
+                      PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1 + PSSerial[psloopcounter2 + 3] + space1);
                       psloopcounter2++;
                       psloopcounter2++;
                       psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 3].length()) == 2) {
-                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                      PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1 + PSSerial[psloopcounter2 + 3]);
                       psloopcounter2++;
                       psloopcounter2++;
                       psloopcounter2++;
                       } else {
-                      PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + "  ");
+                      PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space2);
                       psloopcounter2++;
                       psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
                       if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
-                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                      PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1 + PSSerial[psloopcounter2 + 3]);
                       psloopcounter2++;
                       psloopcounter2++;
                       psloopcounter2++;
                       } else {
-                      PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                      PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                       psloopcounter2++;
                       psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
-                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                      PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                       psloopcounter2++;
                       psloopcounter2++;
                     } else if ((PSSerial[psloopcounter2 + 2].length()) == 4) {
-                      PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                      PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                       psloopcounter2++;
                       psloopcounter2++;
                     } else {
-                      PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "   ");
+                      PSfinal.concat(space2 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space3);
                       psloopcounter2++;
                     }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
                         if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " " + PSSerial[psloopcounter2 + 3]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1 + PSSerial[psloopcounter2 + 3]);
                         psloopcounter2++;
                         psloopcounter2++;
                         psloopcounter2++;
                         } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                         }
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        PSfinal.concat(space2 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space2);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space2);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 5) {
-                    PSfinal.concat(PSSerial[psloopcounter2] + " " +PSSerial[psloopcounter2 + 1] + " ");
+                    PSfinal.concat(PSSerial[psloopcounter2] + space1 +PSSerial[psloopcounter2 + 1] + space1);
                     psloopcounter2++;
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 6) {
-                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                    PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                     psloopcounter2++;
                     } else {
-                    PSfinal.concat("   " + PSSerial[psloopcounter2] + "    ");
+                    PSfinal.concat(space3 + PSSerial[psloopcounter2] + space4);
                     }
                   } else if ((PSSerial[psloopcounter2].length()) == 2){
                     if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
                         if ((PSSerial[psloopcounter2 + 3].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + PSSerial[psloopcounter2 + 3]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + PSSerial[psloopcounter2 + 3]);
                         psloopcounter2++;
                         psloopcounter2++;
                         psloopcounter2++;
                         } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                         }
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 3) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat("  " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        PSfinal.concat(space2 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space2);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space2);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                         psloopcounter2++;
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 5) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                         psloopcounter2++;
                     } else {
-                    PSfinal.concat("   " + PSSerial[psloopcounter2] + "   ");
+                    PSfinal.concat(space3 + PSSerial[psloopcounter2] + space3);
                     }
                   } else if ((PSSerial[psloopcounter2].length()) == 3){
                     if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2] + space1);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 2].length()) == 2) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + "  ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space2);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
                       if ((PSSerial[psloopcounter2 + 2].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                         psloopcounter2++;
                         psloopcounter2++;
                       } else {
-                        PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                         psloopcounter2++;
                       }
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
-                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                    PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                     psloopcounter2++;
                     } else if ((PSSerial[psloopcounter2 + 1].length()) == 4) {
-                    PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                    PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                     psloopcounter2++;
                     } else {
-                    PSfinal.concat("  " + PSSerial[psloopcounter2] + "   ");
+                    PSfinal.concat(space2 + PSSerial[psloopcounter2] + space3);
                     }
                   } else if ((PSSerial[psloopcounter2].length()) == 4){
                       if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
                           if ((PSSerial[psloopcounter2 + 2].length()) == 1){
-                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " " + PSSerial[psloopcounter2 + 2]);
+                          PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1 + PSSerial[psloopcounter2 + 2]);
                           psloopcounter2++;
                           psloopcounter2++;
                           } else {
-                          PSfinal.concat(" " + PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                          PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                           psloopcounter2++;
                           }
                       } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
-                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                          PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                           psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 1].length()) == 3) {
-                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                          PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                           psloopcounter2++;
                       } else {
-                    PSfinal.concat("  " + PSSerial[psloopcounter2] + "  ");
+                    PSfinal.concat(space2 + PSSerial[psloopcounter2] + space2);
                       }
                   } else if ((PSSerial[psloopcounter2].length()) == 5){
                       if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
-                        PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1] + " ");
+                        PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1] + space1);
                         psloopcounter2++;
                       } else if ((PSSerial[psloopcounter2 + 1].length()) == 2) {
-                            PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                            PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                             psloopcounter2++;
                       } else {
-                            PSfinal.concat(" " + PSSerial[psloopcounter2] + "  ");
+                            PSfinal.concat(space1 + PSSerial[psloopcounter2] + space2);
                       }
                   } else if ((PSSerial[psloopcounter2].length()) == 6){
                       if ((PSSerial[psloopcounter2 + 1].length()) == 1) {
-                          PSfinal.concat(PSSerial[psloopcounter2] + " " + PSSerial[psloopcounter2 + 1]);
+                          PSfinal.concat(PSSerial[psloopcounter2] + space1 + PSSerial[psloopcounter2 + 1]);
                           psloopcounter2++;
                       } else {
-                    PSfinal.concat(" " + PSSerial[psloopcounter2] + " ");
+                    PSfinal.concat(space1 + PSSerial[psloopcounter2] + space1);
                       }
                   } else if ((PSSerial[psloopcounter2].length()) == 7){
-                    PSfinal.concat(PSSerial[psloopcounter2] + " ");
+                    PSfinal.concat(PSSerial[psloopcounter2] + space1);
                   } else if ((PSSerial[psloopcounter2].length()) >= 8){
                     PSSerial[psloopcounter2].remove(8);
                     PSfinal.concat(PSSerial[psloopcounter2]);
@@ -350,6 +354,7 @@ String rdspstextprocessor(String getTitleSerialp) {
 void serialEvent() {
             String getTextSerial = Serial.readString();
             getTextSerial.trim();
+            getTextSerial[100] = '\0';
             String appliedchanges = F("Applied changes");
             String radiotextoutputtitle = F("Radiotext: ");
             String rdspsoutputtitle = F("RDS-PS: ");
@@ -369,7 +374,8 @@ void serialEvent() {
                 Serial.println(F("info"));
                 Serial.println(F("You can send any information with this command. That could be an announcement, the name of the currently running show or something else."));
                 Serial.println(line);
-                Serial.println(F("Notice: The inputted text must be less than a specified number of characters (128 for radiotext, 96 for RDS-PS). There is no way to change that, because it's a hardware limitation of the Si4713 chip."));
+                Serial.println(F("To change the station name, you need to change it in the rdspstextprocessor function too."));
+                Serial.println(F("Notice: There are character limits: 64 characters for radiotext (RDS spec limitation), 96 characters or 12 messages for RDS-PS (hardware limitation of the Si4713 chip)"));
             } else if (getTextSerial == F("main")) {
                 initialRDSdata();
                 Serial.println(appliedchanges);
@@ -386,16 +392,14 @@ void serialEvent() {
               getTitleSerial.trim();
               String nowplaying = F("Now playing: ");
             String RTSerial = nowplaying + getTitleSerial;
-            int RTlength = RTSerial.length();
-              if(RTSerial.length() > 64) {
-               RTSerial[64] = '\0';
-            }
             String PSfinal2 = rdspstextprocessor(getTitleSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
             if (mesCount>12) mesCount = 12;
-            char radiotext[128];
+            char radiotext[64];
+            radiotext[64] = '\0';
             char rdsps[96];
+            rdsps[96] = '\0';
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
@@ -412,16 +416,14 @@ void serialEvent() {
               String getInfoSerial = Serial.readString();
               getInfoSerial.trim();
             String RTSerial = getInfoSerial;
-            int RTlength = RTSerial.length();
-              if(RTSerial.length() > 64) {
-               RTSerial[64] = '\0';
-            }
             String PSfinal2 = rdspstextprocessor(getInfoSerial);
             int PSnewlength = PSfinal2.length();
             int mesCount = PSnewlength / 8;
             if (mesCount>12) mesCount = 12;
-            char radiotext[128];
+            char radiotext[64];
+            radiotext[64] = '\0';
             char rdsps[96];
+            rdsps[96] = '\0';
             radio.beginRDS(0x4F87, mesCount);
             strcpy(rdsps, PSfinal2.c_str());
             radio.setRDSstation(rdsps);
