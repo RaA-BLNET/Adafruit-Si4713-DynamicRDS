@@ -31,8 +31,10 @@ Adafruit_Si4713 radio = Adafruit_Si4713(RESETPIN);
 
 void initialRDSdata() {
   radio.beginRDS(0x4F87, 1);
-  radio.setRDSstation("RaABLNET");
-  radio.setRDSbuffer("Adafruit-Si4713-DynamicRDS repository from GitHub.com", gcCounter);
+  char initPS[96] = "RaABLNET";
+  char initRT[64] = "Adafruit-Si4713-DynamicRDS repository from GitHub.com";
+  radio.setRDSstation(initPS);
+  radio.setRDSbuffer(initRT, gcCounter);
   gcCounter++;
 }
 
@@ -381,8 +383,10 @@ void serialEvent() {
                 Serial.println(appliedchanges);
             } else if (getTextSerial == F("reg")) {
                 radio.beginRDS(0x4E87, 1);
-                radio.setRDSstation("Regional");
-                radio.setRDSbuffer("Regional RDS data", gcCounter);
+                char regPS[96] = "Regional";
+                char regRT[64] = "Regional RDS data";
+                radio.setRDSstation(regPS);
+                radio.setRDSbuffer(regRT, gcCounter);
                 gcCounter++;
                 Serial.println(appliedchanges);
             } else if (getTextSerial == F("title")) {
