@@ -277,6 +277,7 @@ void Adafruit_Si4713::beginRDS(uint16_t programID, int mesCt) {
  *            string to load
  */
 void Adafruit_Si4713::setRDSstation(char *s) {
+  s[96] = '\0';
   uint8_t i, len = strlen(s);
   uint8_t slots = (len + 3) / 4;
 
@@ -304,7 +305,10 @@ void Adafruit_Si4713::setRDSbuffer(char s[64], int gcCounterPT) {
   char carriageReturn[2];
   carriageReturn[0] = 0x0D;
   carriageReturn[1] = '\0';
-  strcat(s, carriageReturn);
+  if (strlen(s) < 64) {
+      strcat(s, carriageReturn);
+  }
+    s[64] = '\0';
   uint8_t i, len = strlen(s);
   uint8_t gcValue;
   uint8_t slots = ((len + 3) / 4);
