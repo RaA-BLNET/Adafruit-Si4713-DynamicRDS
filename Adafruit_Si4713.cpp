@@ -245,8 +245,8 @@ void Adafruit_Si4713::readTuneMeasure(uint16_t freq) {
  *            sets SI4713_PROP_TX_RDS_PI to parameter value
  */
 void Adafruit_Si4713::beginRDS(uint16_t programID, int mesCt) {
-  // 75KHz (default is 68.25)
-  setProperty(SI4713_PROP_TX_AUDIO_DEVIATION, 7500);
+  // 65.75KHz
+  setProperty(SI4713_PROP_TX_AUDIO_DEVIATION, 6575);
 
   //6.75KHz (default is 675)
   setProperty(SI4713_PROP_TX_PILOT_DEVIATION, 675);
